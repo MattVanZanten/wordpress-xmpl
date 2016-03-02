@@ -1,0 +1,19 @@
+    ## YAML Template.
+---
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html
+hooks:
+  BeforeInstall:
+    - location: deploy_hooks/prepare.sh
+      timeout: 120
+      runas: root
+  AfterInstall:
+    - location: deploy_hooks/configure.sh
+      timeout: 30
+      runas: root
+    - location: deploy_hooks/cleanup.sh
+      timeout: 60
+      runas: root
